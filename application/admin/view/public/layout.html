@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title|default="页面标题"}</title>
+    <link rel="stylesheet" href="/tp5.1/public/static/css/bootstrap.min.css">
+    <script src="/tp5.1/public/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/tp5.1/public/static/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {include file="public/nav" /}
+        </div>
+    </div>
+
+    <div class="row">
+        <!--左边栏-->
+        <div class="col-md-2">
+            {include file="public/left" /}
+        </div>
+
+        <div class="col-md-10">
+        {__CONTENT__}         <!-- 占位符-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
