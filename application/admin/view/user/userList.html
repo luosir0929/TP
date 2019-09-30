@@ -1,0 +1,48 @@
+{layout name="public/layout" /}
+<h4 class="text-center text-success">用户列表</h4>
+<table class="table table-default table-hover text-center">
+    <tr>
+        <td>ID</td>
+        <td>用户名</td>
+        <td>邮箱</td>
+        <td>手机号</td>
+        <td>注册时间</td>
+        <td>身份</td>
+        <td>状态</td>
+        <td colspan="2">操作</td>
+    </tr>
+    {volist name="userList" id="user" empty="$empty"}
+    <tr>
+        <td>{$user.id}</td>
+        <td>{$user.name}</td>
+        <td>{$user.email}</td>
+        <td>{$user.mobile}</td>
+        <td>{$user.create_time}</td>
+        {if $user.is_admin == 1}
+        <td class="text-danger">超级管理员</td>
+        {else /}
+        <td class="text-primary text-center">注册会员</td>
+        {/if}
+        {if $user.status == 1}
+        <td class="text-success">正常</td>
+        {else /}
+        <td class="text-danger">异常</td>
+        {/if}
+<!--        非当前用户是不允许编辑其他用户的资料-->
+        {eq name="$user.id" value="$Think.session.admin_id"}
+        <td><a href="{:url('user/userEdit',['id'=>$user.id])}">编辑</a></td>
+        {/eq}
+        {neq name="$user.id" value="$Think.session.admin_id"}
+        <td><a href=" " onclick="dele();return false;">删除</a></td>
+        {/neq}
+    </tr>
+    <script>
+        function dele() {
+            if (confirm('您真的要删除吗？') == true){
+                window.location.href = "{:url('user/doDelete',['id'=>$user.id])}";
+            }
+        }
+    </script>
+    {/volist}
+</table>
+<div class="text-center">{$userList | raw}</div>

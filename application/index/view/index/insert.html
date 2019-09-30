@@ -1,0 +1,59 @@
+{extend name="public::base" /}
+{block name="body"}
+<!--主体-->
+<div class="row">
+    <!--    左侧8列-->
+    <div class="col-md-8">
+        <!-- 页头-->
+        <div class="page-header">
+            <h2>发布文章</h2>
+        </div>
+        <form class="form-horizontal" method="post" id="post" action="{:url('index/index/save')}" enctype="multipart/form-data">
+            <input type="hidden" name="user_id" value="{$Think.session.user_id}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题</label>
+                <div class="col-sm-10">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="文章标题">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分类</label>
+                <div class="col-sm-10">
+                    <select name="cate_id" id="" class="form-control">
+                        {volist name="cateList" id="cate"}
+                        <option value="{$cate.id}">{$cate.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="content" id="content" style="min-height: 250px "></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题图片</label>
+                <div class="col-sm-10">
+                    <input type="file" name="title_img" class="form-control" id="title_img" placeholder="标题图片">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" id="submit">保存</button>
+            </div>
+            </div>
+        </form>
+
+    </div>
+<script>
+    bkLib.onDomLoaded(function() {
+        new nicEditor({iconsPath : '/tp5.1/public/static/js/nicEditorIcons.gif'}).panelInstance('content');
+    });
+</script>
+
+
+
+    {/block}
